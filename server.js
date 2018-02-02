@@ -6,6 +6,8 @@ const path = require('path');
 const ejs = require('ejs');
 //
 
+const frontRoute = require('./routes/front');
+
 /*
 Initialiser le serveur
 */
@@ -14,6 +16,10 @@ const port = process.env.PORT || 3000;
 
 app.set( 'views', __dirname + '/www' );
 app.use( express.static(path.join(__dirname, 'www')) );
+
+app.use('/', frontRoute);
+app.engine( 'html', ejs.renderFile );
+app.set( 'view engine', 'html' );
 //
 
 /*
